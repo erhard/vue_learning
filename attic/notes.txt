@@ -1,0 +1,13 @@
+
+    it('calls onClose when button is clicked', () => {
+        let onClose = jest.fn();
+        let wrapper = mount(Login,
+            {propsData: {
+                onClose
+            }
+            });
+        console.log("---------------------");
+        console.log(wrapper);
+        console.log("---------------------");
+        wrapper.find('button').trigger('click') 
+    });
