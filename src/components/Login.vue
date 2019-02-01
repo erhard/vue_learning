@@ -47,7 +47,7 @@ export default Vue.extend(  {
 </script>
 <!-- Default behavior of this component -->
 <style>
-@import '/public/material.css';
+@import '../assets/material.css';
 
 
 .test {
