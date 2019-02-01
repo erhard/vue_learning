@@ -10,14 +10,12 @@ yarn install
 yarn run serve
 ```
 
+###WorkArounds 
+https://github.com/vuejs/vue-web-component-wrapper/issues/28
+
 ### Compiles and minifies for production
 ```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
+vue-cli-service build --target wc --name my-login src/main.ts
 ```
 
 ### Lints and fixes files

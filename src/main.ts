@@ -1,14 +1,6 @@
 import Vue from 'vue';
+import wrap from '@vue/web-component-wrapper';
 import Login from './components/Login.vue';
-import store from './store';
-import Vuetify from 'vuetify';
-import 'vuetify/dist/vuetify.min.css';
-
-Vue.use(Vuetify);
-
 Vue.config.productionTip = false;
-
-new Vue({
-  store,
-  render: (h) => h(Login),
-}).$mount('#app');
+const CustomElement = wrap(Vue, Login);
+window.customElements.define('my-login', CustomElement);
