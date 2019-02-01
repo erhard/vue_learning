@@ -5,9 +5,9 @@
 
 <div >
     <section :style="style" class="test"  >
-    dddddddddddddddddddddddddddddd
-    </section>
-adfsasfdasdf
+        <p> The button below should be a fab-add-button of material design
+        </p>
+   </section>
 
 <button class="mdl-button mdl-button--fab mdl-button--colored">
     <i class="material-icons">add</i>
@@ -48,6 +48,7 @@ export default Vue.extend(  {
 <!-- Default behavior of this component -->
 <style>
 @import '/public/material.css';
+
 
 .test {
    background: green;
