@@ -10,6 +10,10 @@
     "debug": "node --inspect-brk=0.0.0.0 ./node_modules/.bin/vue-cli-service test:unit"
   },
   "dependencies": {
+    "@material/button": "^0.44.0",
+    "@material/textfield": "^0.43.1",
+    "@material/theme": "^0.43.0",
+    "@types/material__textfield": "^0.35.0",
     "vue": "^2.5.21",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",

@@ -2,21 +2,43 @@
 
 
 
+<div :style="style">
+    <!-- Render textfield component -->
 
-<div >
-    <section :style="style" class="test"  >
-        <p> The button below should be a fab-add-button of material design
-        </p>
-   </section>
 
-<button class="mdl-button mdl-button--fab mdl-button--colored">
-    <i class="material-icons">add</i>
-    </button>
-</div>
+    <div class="  
+       mdc-theme--primary-bg mdc-theme--on-primary" 
+        
+       >
+        <div class="mdc-text-field    
+            username"   ref="userName" >
+            <input type="text" class="mdc-text-field__input" id="username-input" name="username">
+            <label class="mdc-floating-label" for="username-input">Username</label>
+            <div class="mdc-line-ripple"></div>
+        </div>
+        <div class="mdc-text-field password" ref="pwd">
+            <input type="password" class="mdc-text-field__input" id="password-input" name="password">
+            <label class="mdc-floating-label" for="password-input">Password</label>
+            <div class="mdc-line-ripple"></div>
+                </div>
+                <button class="mdc-button mdc-button--outlined " ref="sendButton">
+                    <span class="mdc-button__label">login</span>
+        </button>
+        
+        
+    </div>
+
+
+
+
+
+        </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import {MDCTextField} from '@material/textfield';
+import {MDCRipple} from '@material/ripple';
 export default Vue.extend(  {
     data() {
         return {
@@ -30,28 +52,48 @@ export default Vue.extend(  {
         },
     },
 
+    mounted() { 
+        new MDCTextField(this.$refs.userName);
+        new MDCTextField(this.$refs.pwd);
+        new MDCRipple(this.$refs.sendButton); 
+    
+    
+    },
     computed:{
         style() {
-        let color = JSON.parse(this.colorscheme);
-        let register = this.register;
-        let backend = this.backend;
-        return "background: " + color['background'];
+            let color = JSON.parse(this.colorscheme);
+            let register = this.register;
+            let backend = this.backend;
+            return "#background: " + color['background'];
         }, 
     },
     props: {
         colorscheme: {type: String,require: false},
         backend: String,
         register: String,
-        },
+    },
 });
 </script>
 <!-- Default behavior of this component -->
-<style>
-@import '../assets/material.css';
+<!-- Only importing the css needed not more -->
+<!-- The imports are treated by webpack >>>>>> the assets-Dir is preprocessed by webpack-->
+<style >
 
-
-.test {
-   background: green;
+:root {
+--mdc-theme-on-secondary: red;
 }
 
+.mdc-theme--primary-bg {
+   // --mdc-theme-on-secondary: red;
+    background-color: var(--mdc-theme-on-secondary);
+}
+
+
+@import '../assets/mdc.textfield.css';
+@import '../assets/mdc.floating-label.css';
+@import '../assets/mdc.line-ripple.css';
+@import '../assets/mdc.button.css';
+
+
 </style>
+
