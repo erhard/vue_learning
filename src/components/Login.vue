@@ -4,11 +4,8 @@
 
 <div :style="style">
     <!-- Render textfield component -->
-
-
     <div class="  
        mdc-theme--primary-bg mdc-theme--on-primary" 
-        
        >
         <div class="mdc-text-field    
             username"   ref="userName" >
@@ -24,14 +21,7 @@
                 <button class="mdc-button mdc-button--outlined " ref="sendButton">
                     <span class="mdc-button__label">login</span>
         </button>
-        
-        
     </div>
-
-
-
-
-
         </div>
 </template>
 
@@ -61,14 +51,12 @@ export default Vue.extend(  {
     },
     computed:{
         style() {
-            let color = JSON.parse(this.colorscheme);
             let register = this.register;
             let backend = this.backend;
-            return "#background: " + color['background'];
+            return backend;
         }, 
     },
     props: {
-        colorscheme: {type: String,require: false},
         backend: String,
         register: String,
     },
@@ -79,21 +67,12 @@ export default Vue.extend(  {
 <!-- The imports are treated by webpack >>>>>> the assets-Dir is preprocessed by webpack-->
 <style >
 
-:root {
---mdc-theme-on-secondary: red;
-}
-
 .mdc-theme--primary-bg {
-   // --mdc-theme-on-secondary: red;
     background-color: var(--mdc-theme-on-secondary);
 }
-
-
 @import '../assets/mdc.textfield.css';
 @import '../assets/mdc.floating-label.css';
 @import '../assets/mdc.line-ripple.css';
 @import '../assets/mdc.button.css';
-
-
 </style>
 
