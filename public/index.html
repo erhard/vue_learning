@@ -5,25 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>login2</title>
+    <title>login</title>
       <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
      <link rel="stylesheet" type="text/css" href="t1.css">
     </head>
-
-    
-    <style>
-   
+ <style>
+  @import "t1.css"; 
 my-login  {
---mdc-theme-on-secondary: red; 
-          }
-    
-    
-    
-    
-    </style>
-    
-    
-    
+ --mdc-theme-primary: #0d57a6;
+ --mdc-theme-secondary: #b47d00;
+ --mdc-theme-background: #e5edf5;
+ --mdc-theme-surface: #f8f2e6;
+ --mdc-theme-on-primary: white;
+ --mdc-theme-on-secondary: #323232;
+ --mdc-theme-on-surface: #323232;
+ --mdc-theme-error: red;
+ --mdc-theme-text-primary-on-dark: white;
+ //+++++++++ Using cascading to overite internal setting of mdc with css vars++++++//
+ --mdc-floating-label-focused:  #b47d00;
+}
+ </style>
     
     <body>
     <noscript>

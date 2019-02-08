@@ -1,3 +1,16 @@
-.test {
-background: red;
+
+   
+my-login  {
+ --mdc-theme-primary: #0d57a6;
+ --mdc-theme-secondary: #b47d00;
+ --mdc-theme-background: #e5edf5;
+ --mdc-theme-surface: #f8f2e6;
+ --mdc-theme-on-primary: white;
+ --mdc-theme-on-secondary: #323232;
+ --mdc-theme-on-surface: #323232;
+ --mdc-theme-error: red;
+ --mdc-theme-text-primary-on-dark: white;
+ //+++++++++ Using cascading to overite internal setting of mdc with css vars++++++//
+ --mdc-floating-label-focused:  #b47d00;
 }
+    

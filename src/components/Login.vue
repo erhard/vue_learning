@@ -4,9 +4,7 @@
 
 <div :style="style">
     <!-- Render textfield component -->
-    <div class="  
-       mdc-theme--primary-bg mdc-theme--on-primary" 
-       >
+    <div >
         <div class="mdc-text-field    
             username"   ref="userName" >
             <input type="text" class="mdc-text-field__input" id="username-input" name="username">
@@ -18,7 +16,7 @@
             <label class="mdc-floating-label" for="password-input">Password</label>
             <div class="mdc-line-ripple"></div>
                 </div>
-                <button class="mdc-button mdc-button--outlined " ref="sendButton">
+                <button class="mdc-button mdc-button--raised" ref="sendButton">
                     <span class="mdc-button__label">login</span>
         </button>
     </div>
@@ -46,8 +44,6 @@ export default Vue.extend(  {
         new MDCTextField(this.$refs.userName);
         new MDCTextField(this.$refs.pwd);
         new MDCRipple(this.$refs.sendButton); 
-    
-    
     },
     computed:{
         style() {
@@ -66,13 +62,13 @@ export default Vue.extend(  {
 <!-- Only importing the css needed not more -->
 <!-- The imports are treated by webpack >>>>>> the assets-Dir is preprocessed by webpack-->
 <style >
-
-.mdc-theme--primary-bg {
-    background-color: var(--mdc-theme-on-secondary);
-}
 @import '../assets/mdc.textfield.css';
 @import '../assets/mdc.floating-label.css';
 @import '../assets/mdc.line-ripple.css';
 @import '../assets/mdc.button.css';
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--mdc-floating-label-focused, black);
+}
 </style>
 
