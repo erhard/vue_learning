@@ -9,22 +9,60 @@
       <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="individual_styles.css">
     </head>
+    <style>
+       .container {
+           display: flex;
+           align-items: center;
+           justify-content: center;     
+       }
+    
+       .centered {
+          
+       max-width:80%;
+       margin-bottom: 20%;
+       }
+    </style>
+    
     <body>
     <noscript>
       <strong>We're sorry but login doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <my-login
-              backend= 'login.de'
-              register= 'true'
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <a href="#" id ="menu" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+                <span class="mdc-top-app-bar__title">WebComponent</span>
+                    </section>
+  </div>
+  </header>
+
+
+
+<div class="container">
+    <my-login id="my_login"
+              backend=  'http://localhost:9001/login'
+              register= true
+              locStore= false
+              class= 'centered'
+              title='login'
               >
    </my-login>
-    <!-- built files will be auto injected -->
-  </body>
+</div> 
+ 
+ </body>
+    <!-- the login Component emits a data Object, which you can catch outside the component -->
   <script>
     var loginComponent = document.querySelector('my-login');
+    var menu = document.querySelector('#menu');
     loginComponent.addEventListener("clicked",
             function(data){
             console.log(data);
             });
+    loginComponent.style.display = "none"; 
+    menu.addEventListener("click",
+            function(){
+            loginComponent.style.display = "block";
+            });
   </script>
+
   </html>
