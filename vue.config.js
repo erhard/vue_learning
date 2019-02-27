@@ -37,12 +37,7 @@ function enableShadowCss(config) {
                 });
     }
             );
-
-
-
 }
-
-
 
 module.exports = {
     chainWebpack: function(config) {

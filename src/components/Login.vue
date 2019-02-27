@@ -1,44 +1,37 @@
 <template>
-    <!-- Render textfield component -->
-    <div class="mdc-card mdc-typography container">
-        <h3 class="mdc-typography--headline3 title">{{title}}</h3>
-        <div class="mdc-text-field mdc-text-field--with-trailing-icon username mdc-text-field--focused"   ref="userName" >
-            <input type="text" class="mdc-text-field__input" 
-            id="username-input" name="user"
-            v-model="user" v-on:keyup="checkForm"      >
-            <label class="mdc-floating-label" for="username-input">Username</label>
-            <i class="material-icons mdc-text-field__icon" tabindex="0" role="button" ref="textOK">done</i>
-            <div class="mdc-line-ripple"></div>
-        </div>
-        <p class="mdc-text-field-helper-text" >
-        <span  v-if="user_error" style="color: red">
-            {{ user_error_message }}
-        </span>
-        </p>
-        <div class="mdc-text-field password" ref="pwd">
-            <input type="password" class="mdc-text-field__input" 
-            id="password-input" name="password"
-            v-model="password" v-on:keyup="checkForm"
-            >
-            <label class="mdc-floating-label" for="password-input">Password</label>
-            <div class="mdc-line-ripple"></div>
-        </div>
-
-        <p class="mdc-text-field-helper-text" >
-        <span  v-if="password_error" style="color: red">
-            <div class="mdc-line-ripple"></div>
-            {{ password_error_message }}
-        </span>
-        </p>
-        
-        <div class="mdc-card__actions">
-            <button :disabled="submit_disabled" class="mdc-button mdc-button--raised mdc-card__action--button" ref="sendButton"
-                @click="my_login" >
-                <span class="mdc-button__label">login</span>
-            </button>
-
-        </div>
+<!-- Render textfield component -->
+<div class="mdc-card mdc-typography container">
+    <h3 class="mdc-typography--headline3 title">{{title}}</h3>
+  
+    
+    <div class="mdc-text-field username "   ref="userName" >
+        <input autofocus type="text" class="mdc-text-field__input mdc-text-field--focused" 
+        id="username-input" name="user"
+        v-model="user" v-on:keyup="checkUser"  refs="userInput"    >
+        <label class="mdc-floating-label" for="username-input">Username</label>
+        <i v-show="user_done" class="material-icons mdc-text-field__icon" tabindex="0" role="button" ref="textOK">done</i>
+        <div class="mdc-line-ripple"></div>
     </div>
+    
+    
+    <div class="mdc-text-field password" ref="passwd">
+        <input type="password" class="mdc-text-field__input" 
+        id="password-input" name="password"
+        v-model="password" v-on:keyup="checkPassword"
+        >
+        <label class="mdc-floating-label" for="password-input">Password</label>
+        <i v-show="password_done" class="material-icons mdc-text-field__icon" tabindex="0" role="button" ref="pwdOK">done</i>
+        <div class="mdc-line-ripple"></div>
+    </div>
+
+    <div class="mdc-card__actions">
+        <button :disabled="submit_disabled" class="mdc-button mdc-button--raised mdc-card__action--button" ref="sendButton"
+            @click="my_login" >
+            <span class="mdc-button__label">login</span>
+        </button>
+
+    </div>
+</div>
 </template>
 
 <script lang="ts">
@@ -46,103 +39,99 @@ import Vue from 'vue';
 import {MDCTextField} from '@material/textfield';
 import {MDCRipple} from '@material/ripple';
 import fetch from 'unfetch';
-import "vue-material-design-icons/styles.css";
 import {MDCTextFieldIcon} from '@material/textfield/icon';
 export default Vue.extend(  {
     data() {
         return {
             user: '',
+            user_length: 6,
+            password_length: 6,
             password: '',
             submit_disabled: true,
-            user_error: false,
-            user_error_message: "",
-            password_error: false,
-            password_message: "",
+            user_done: false,
+            password_done: false,
+            pristine_length: 3,
         };
     },
 
     props: 
     {
-     backend: {
-       default: 'localhost:8083/login',
-       type: String
-     },
+        backend: {
+            default: 'localhost:8083/login',
+            type: String
+        },
 
-     title: {
-       default: 'ijijijiji',
-       type: String
-     },
+        title: {
+            default: 'ijijijiji',
+            type: String
+        },
 
-     register: {
-       default: 'false',
-       type: Boolean
-     },
+        register: {
+            default: 'false',
+            type: Boolean
+        },
 
-     locStore: {
-       default: 'true',
-       type: Boolean
-     }
+        locStore: {
+            default: 'true',
+            type: Boolean
+        }
 
     },
-    
 
     methods: {
         my_login() {
-          fetch(this.backend, {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-                    },
+            fetch(this.backend, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ username: this.user,
-                                       password: this.password
+                    password: this.password
                 })
-                }).then( r => {
-                return r.json()}).then(data => {
+            }).then( r => {
+            return r.json()}).then(data => {
                 console.log(data["token"]);
                 this.$emit('clicked', {"token": data["token"]});
-                 })
-      }, //EOF Method
-        
-      checkForm(event) {
-            if(this.user.length < 2){
-              this.user_error=true;
-              this.user_error_message = "Username zu kurz";
+            })
+        }, //EOF Method
+
+        checkUser(event) {
+            if(this.user.length > this.user_length ){
+                this.user_done=true;
             }
             else
             {
-              this.user_error=false;
-              this.user_error_message = "";
+                this.user_done=false;
+        
             }
-         if (this.user.length > 2 && this.password.length > 6) {
-             this.submit_disabled = false;
-           }
-         if(this.password.length < 6){
-              this.password_error=true;
-              this.password_error_message = "Password zu kurz";
+            if (this.user_done && this.password_done)
+            { this.submit_disabled = false} else
+            { this.submit_disabled = true}
+        },
+
+
+        checkPassword(event)
+        {
+            if(this.password.length > this.password_length){
+                this.password_done=true;
             }
-          else
+            else
             {
-              this.password_error=false;
-              this.password_error_message = "";
-            }
-         if (this.user.length > 2 && this.password.length > 6) {
-             this.submit_disabled = false;
-         }else
-         {
-             this.submit_disabled = true;
-         }
-},
-},
+                this.password_done=false;
+            };
+            if (this.user_done && this.password_done)
+            { this.submit_disabled = false} else
+            { this.submit_disabled = true}
+        },
+    },
 
     mounted() { 
         new MDCTextField(this.$refs.userName);
-        new MDCTextField(this.$refs.pwd);
+        new MDCTextField(this.$refs.passwd);
         new MDCRipple(this.$refs.sendButton); 
-        let doc = this.$refs.textOK;
-        console.log("------------------_");
-        console.log(doc);
-        alert("eeeeeeeeeeeeeeeeeeeee");
-        new MDCTextFieldIcon(doc);
+        new MDCTextFieldIcon(this.$refs.textOK);
+        new MDCTextFieldIcon(this.$refs.pwdOK);
+        this.$refs.userInput.$el.focus();
     },
 
 
@@ -168,15 +157,15 @@ export default Vue.extend(  {
 @import '../assets/mdc.typography.css';
 @import '../assets/material-icons.css';
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-color: var(--mdc-floating-label-focused, black);
+    color: var(--mdc-floating-label-focused, black);
 }
 .container {
- display:   flex;
- align-items: center;
- justify-content: center;
+    display:   flex;
+    align-items: center;
+    justify-content: center;
 }
 
- .title {
- }
+.title {
+}
 </style>
 
