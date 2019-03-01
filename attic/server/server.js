@@ -16,10 +16,13 @@ app.post("/login", (req, res) => {
     console.log("Username: "+ username );
     console.log("Password: " + password);
     if(username!="Max"){
-        res.sendStatus(403); 
+        res.json({
+           "status":"403"
+        });
     }
     else{
         res.json({ 
+            status: 200,
             token: jwt.sign( 
                        { 
                 account: username.toLowerCase(), 

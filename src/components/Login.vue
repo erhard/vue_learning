@@ -2,17 +2,15 @@
 <!-- Render textfield component -->
 <div class="mdc-card mdc-typography container">
     <h3 class="mdc-typography--headline3 title">{{title}}</h3>
-  
     
     <div class="mdc-text-field username "   ref="userName" >
         <input autofocus type="text" class="mdc-text-field__input mdc-text-field--focused" 
         id="username-input" name="user"
-        v-model="user" v-on:keyup="checkUser"  refs="userInput"    >
+        v-model="user" v-on:keyup="checkUser"  ref="userInput"    >
         <label class="mdc-floating-label" for="username-input">Username</label>
         <i v-show="user_done" class="material-icons mdc-text-field__icon" tabindex="0" role="button" ref="textOK">done</i>
         <div class="mdc-line-ripple"></div>
     </div>
-    
     
     <div class="mdc-text-field password" ref="passwd">
         <input type="password" class="mdc-text-field__input" 
@@ -35,16 +33,16 @@
 </template>
 
 <script lang="ts">
+import fetch from 'unfetch';
 import Vue from 'vue';
+import {MDCTextFieldIcon} from '@material/textfield/icon';
 import {MDCTextField} from '@material/textfield';
 import {MDCRipple} from '@material/ripple';
-import fetch from 'unfetch';
-import {MDCTextFieldIcon} from '@material/textfield/icon';
 export default Vue.extend(  {
     data() {
         return {
             user: '',
-            user_length: 6,
+            user_length: 2,
             password_length: 6,
             password: '',
             submit_disabled: true,
@@ -62,17 +60,17 @@ export default Vue.extend(  {
         },
 
         title: {
-            default: 'ijijijiji',
+            default: 'Login',
             type: String
         },
 
         register: {
-            default: 'false',
+            default: false,
             type: Boolean
         },
 
         locStore: {
-            default: 'true',
+            default: true,
             type: Boolean
         }
 
@@ -90,9 +88,14 @@ export default Vue.extend(  {
                 })
             }).then( r => {
             return r.json()}).then(data => {
+                if (data["status"]==200){ 
                 console.log(data["token"]);
-                this.$emit('clicked', {"token": data["token"]});
-            })
+                this.$emit('clicked', {"token": data["token"],
+                "status":200});
+            }else{
+                this.$emit('clicked', {"status": data["status"]});
+            }
+            });
         }, //EOF Method
 
         checkUser(event) {
@@ -102,7 +105,6 @@ export default Vue.extend(  {
             else
             {
                 this.user_done=false;
-        
             }
             if (this.user_done && this.password_done)
             { this.submit_disabled = false} else
@@ -131,7 +133,7 @@ export default Vue.extend(  {
         new MDCRipple(this.$refs.sendButton); 
         new MDCTextFieldIcon(this.$refs.textOK);
         new MDCTextFieldIcon(this.$refs.pwdOK);
-        this.$refs.userInput.$el.focus();
+        this.$refs.userInput.focus();
     },
 
 

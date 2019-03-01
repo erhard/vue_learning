@@ -15,9 +15,7 @@
            align-items: center;
            justify-content: center;     
        }
-    
        .centered {
-          
        max-width:80%;
        margin-bottom: 20%;
        }
@@ -50,14 +48,25 @@
 </div> 
  
  </body>
-    <!-- the login Component emits a data Object, which you can catch outside the component -->
+    <!-- the login Component emits a data Object, which you can catch outside the component 
+    it logs out the requests payload-->
   <script>
     var loginComponent = document.querySelector('my-login');
     var menu = document.querySelector('#menu');
     loginComponent.addEventListener("clicked",
             function(data){
-            console.log(data);
+            let payload=data.detail[0];
+            console.log(payload["token"]);
+            console.log(payload["status"]);
+            loginComponent.style.display = "none";
+          //react on the response
+            if (payload["status"]=="200"){
+            alert("Logged In"); 
+            }else{
+            alert("Permission denied");
+            }
             });
+
     loginComponent.style.display = "none"; 
     menu.addEventListener("click",
             function(){
