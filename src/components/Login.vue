@@ -14,7 +14,7 @@
     
     <div class="mdc-text-field password" ref="passwd">
         <input type="password" class="mdc-text-field__input" 
-        id="password-input" name="password"
+        id="password-input" name="password"  ref="passwd_input"
         v-model="password" v-on:keyup="checkPassword"
         >
         <label class="mdc-floating-label" for="password-input">Password</label>
@@ -75,7 +75,11 @@ export default Vue.extend(  {
         }
 
     },
+    
+    computed:{
 
+
+    },
     methods: {
         my_login() {
             fetch(this.backend, {
@@ -106,14 +110,30 @@ export default Vue.extend(  {
             {
                 this.user_done=false;
             }
+            console.log("-----------------kkkkkkk-1--------------------------");
+            console.log(this.user_done);
+            console.log(this.password_done);
+            console.log("--------------ENde user_done");
+            
             if (this.user_done && this.password_done)
-            { this.submit_disabled = false} else
-            { this.submit_disabled = true}
+            { this.submit_disabled = false
+            
+            console.log("yeah3");
+            console.log(this.submit_disabled);
+            
+            
+            } else
+            { 
+            
+            
+            console.log("yeah4");
+            console.log(this.submit_disabled);
+            this.submit_disabled = true}
         },
-
 
         checkPassword(event)
         {
+            console.log("Password triggert");
             if(this.password.length > this.password_length){
                 this.password_done=true;
             }
@@ -121,9 +141,24 @@ export default Vue.extend(  {
             {
                 this.password_done=false;
             };
+            console.log("-----------------kkkkkkk2---------------------------");
+            console.log(this.user_done);
+            console.log(this.password_done);
+            console.log("--------------ENde user_done");
+            
+            
             if (this.user_done && this.password_done)
-            { this.submit_disabled = false} else
-            { this.submit_disabled = true}
+            { this.submit_disabled = false
+            
+            console.log("yeah");
+            console.log(this.submit_disabled);
+            
+            } else
+            {
+            
+            console.log("yeah4");
+            this.submit_disabled = true;
+        }
         },
     },
 
@@ -136,14 +171,8 @@ export default Vue.extend(  {
         this.$refs.userInput.focus();
     },
 
-
-
-
 }  
 );
-
-
-
 
 
 </script>

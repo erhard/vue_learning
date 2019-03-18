@@ -1,4 +1,5 @@
 module.exports = {
+  verbose: true,
   moduleFileExtensions: [
     'js',
     'jsx',
@@ -33,6 +34,11 @@ module.exports = {
   globals: {
     'ts-jest': {
       babelConfig: true
+    },
+    MutationObserver: class {
+    constructor(callback) {}
+        disconnect() {}
+            observe(element, initObject) {}
+            }
     }
-  }
 }

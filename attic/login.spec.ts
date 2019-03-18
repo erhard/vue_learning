@@ -9,12 +9,10 @@ describe('login.vue', () => { // #A
 });
 
 describe('Login.vue', () => {
-
-    
     it('renders the login component', () => {
         let wrapper = shallowMount(Login);
         expect(wrapper.text()).toContain('Login');
-          });
+         });
 
     it('should have a input field', () => {
         let wrapper = mount(Login);

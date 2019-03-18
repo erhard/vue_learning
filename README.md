@@ -8,6 +8,7 @@ If you simply wnat to use it You only need to download one file :  app.js from t
 An example for the usage is in the index.html in the dist folder.
 
 
+
 ###Testserver
 
 ```
@@ -18,6 +19,7 @@ yarn server.js
 ```
 
 A Testserver is running on port 9001. This server exposes the url /login as post which accepts username and password in json and returns a status and a jwt token. This server is not for production. To run the demo the server must run.
+
 
 ###The frontend Webcomponent
 The frontend is an example plain vanilla javascript in an index.html file which uses the login.
@@ -32,6 +34,7 @@ yarn pageserver.js
 Now a server runs in port 8080
 Now go to your browser and enter localhost:8080
 
+
 ##Minimal
 Just download app.js from dist-folder and put it your html file.
 
@@ -44,7 +47,7 @@ To configure the login you can set params.
 | register      | switch for register  |                               |
 |               | not yet implemented  | register='true'               |
 | locStore      | writes the jwt token | locStore= 'false'             |
-
+|               | not yet implemented  |                               |
 
 ###CSS Configuration
 The css has a default configuration which is the mdc (material webcomponents) basis.
